@@ -1,0 +1,10 @@
+{
+  "main": "library-management-sapi.raml",
+  "name": "library-management-sapi",
+  "groupId": "f941136f-e315-4bab-95f1-9453bab90b17",
+  "assetId": "library-management-sapi",
+  "version": "1.0.0",
+  "classifier": "raml",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}

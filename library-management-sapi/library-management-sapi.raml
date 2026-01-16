@@ -1,0 +1,135 @@
+#%RAML 1.0
+title: library-management-sapi
+
+baseUri: http://localhost:8081/api/{resourcePath}
+description: "This API gives all library information and book information in the library"
+
+version: v1
+protocols:
+  - HTTPS
+
+
+/libraries:
+  description: "Lists the number of libraries withLoca on, Library Code, available books"
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: {
+              "libraries": [
+                {
+                  "libraryCode": "IBS112",
+                  "libraryBranch": "Miyapur",
+                  "totalBooks": 200,
+                  "availableBooks": 54,
+                  "booksRented": 146
+                },
+                {
+                "libraryCode": "IBS111",
+                "branch": "Secunderabad",
+                "totalBooks": 130,
+                "availableBooks": 69,
+                "booksRented": 61
+                }
+              ]
+            }
+
+  /{libraryId}:
+    get:
+      description: "Get Libraries details based on Library ID"
+      responses:
+        200:
+          body:
+            application/json:
+              example: {
+    "libraryCode": "IBS111",
+    "address": "Road number 3, Secunderabad-500081",
+    "phoneNumber": "040-34534456",
+    "emailAddress": "ibs.secunderabad@gmail.com",
+    "books": [
+        {
+            "bookCode": "BK234",
+            " tle": "Vennello Adapilla",
+            "author": "Yandamoori",
+            "bookCategory": "Novel",
+            "readTimeInHrs": 36,
+            "rentalPrice": "100 Rs",
+            "ra ng": 4.5,
+            "bestSeller": "No"
+        },
+        {
+          "bookCode": "BK123",
+          " tle": "SAP IBP",
+          "author": "Klart Technologies",
+          "bookCategory": "Technology",
+          "readTimeInHrs": 65,
+          "rentalPrice": "200Rs",
+          "ra ng": 4.5,
+          "bestSeller": "No"
+        }
+    ]
+          }
+
+/books:
+  description: "Add New Book to the Library"
+  post:
+    body:
+      application/json:
+        example: {
+                "libraryCode": "IBS222",
+                "title": "Half Girlfriend",
+                "author": "Chetan Bhagat",
+                "bookCategory": "Novel",
+                "readTimeInHrs": 40,
+                "rentalPrice": "150 Rs",
+                "rating": "0",
+                "bestSeller": "No"
+                }
+    responses:
+      201:
+        body:
+          application/json:
+            example: {
+            "message": "Book added successfully",
+            "bookCode": "BK444"
+            }
+  get:
+    queryParameters:
+      rating:
+        type: number
+        required: true
+        example: 5
+      libraryCode:
+        type: string
+        required: true
+        example: "IBS111" 
+    responses:
+      200:
+        body:
+          application/json:
+            example: {
+    "libraryCode": "IBS111",
+    "books": [
+        {
+            "bookCode": "BK666",
+            "title": "MuleSo Mastery",
+            "author": "Klart",
+            "bookCategory": "Tech",
+            "readTimeInHrs": 36,
+            "rentalPrice": "100 Rs",
+            "rating": 4,
+            "bestSeller": "YES"
+        },
+        {
+            "bookCode": "BK555",
+            "title": "SAP MM",
+            "author": "Klart Technologies",
+            "bookCategory": "Technology",
+            "readTimeInHrs": 65,
+            "rentalPrice": "200Rs",
+            "rating": 4,
+            "bestSeller": "YES"
+        }
+    ]
+}
